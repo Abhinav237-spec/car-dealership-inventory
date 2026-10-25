@@ -92,12 +92,13 @@ Raw chat logs are in [PROMPTS.md](PROMPTS.md).
 The API and database deploy to [Render](https://render.com), the SPA to [Vercel](https://vercel.com).
 
 1. **Backend:** Render → New → Blueprint → select this repo (reads `render.yaml`). Enter `ADMIN_PASSWORD` when
-   prompted. Once live, open the service Shell and run `npm run seed` once to create the admin and sample cars.
+   prompted. Set `SEED_ON_START=true` on the service so the admin and sample cars are created at boot (or run `npm run seed` from a shell).
 2. **Frontend:** Vercel → Add New Project → select this repo, set **Root Directory** to `frontend`, and add the
    environment variable `VITE_API_URL` = your Render URL (e.g. `https://dealership-api.onrender.com`, no trailing slash).
 3. Put both URLs here:
 
-- Live app: _TBD_
-- Live API: _TBD_/api/health
+- Live app: https://car-dealership-inventory-j2mx0h2k4-appointly2.vercel.app
+- Live API: https://dealership-api-cngs.onrender.com/api/health
+- Demo admin: `admin@dealership.test` / `Lotline#Admin2026` (demo data only)
 
 Render's free tier sleeps when idle, so the first request after a pause can take about 30 seconds.
