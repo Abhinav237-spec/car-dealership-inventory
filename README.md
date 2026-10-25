@@ -86,3 +86,18 @@ I used Claude (Anthropic) as a pairing partner throughout.
   to decide ambiguous points, for example whether create/update should be admin-only.
 
 Raw chat logs are in [PROMPTS.md](PROMPTS.md).
+
+## Deployment
+
+The API and database deploy to [Render](https://render.com), the SPA to [Vercel](https://vercel.com).
+
+1. **Backend:** Render → New → Blueprint → select this repo (reads `render.yaml`). Enter `ADMIN_PASSWORD` when
+   prompted. Once live, open the service Shell and run `npm run seed` once to create the admin and sample cars.
+2. **Frontend:** Vercel → Add New Project → select this repo, set **Root Directory** to `frontend`, and add the
+   environment variable `VITE_API_URL` = your Render URL (e.g. `https://dealership-api.onrender.com`, no trailing slash).
+3. Put both URLs here:
+
+- Live app: _TBD_
+- Live API: _TBD_/api/health
+
+Render's free tier sleeps when idle, so the first request after a pause can take about 30 seconds.
