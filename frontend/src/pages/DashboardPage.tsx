@@ -7,6 +7,7 @@ import { AppHeader } from '../components/AppHeader'
 import { Button } from '../components/Button'
 import { ConfirmDeleteModal } from '../components/ConfirmDeleteModal'
 import { FiltersBar } from '../components/FiltersBar'
+import { ShowroomBackdrop } from '../components/ShowroomBackdrop'
 import { RestockModal } from '../components/RestockModal'
 import { VehicleCard } from '../components/VehicleCard'
 import { VehicleFormModal } from '../components/VehicleFormModal'
@@ -122,16 +123,21 @@ export function DashboardPage() {
     <div className="min-h-screen">
       <AppHeader email={user?.email ?? ''} onSignOut={logout} />
 
-      <main className="mx-auto max-w-7xl px-6 py-10">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+      {/* Banner: the car-arrival scene sits behind the page title. */}
+      <section className="relative bg-racing-deep text-showroom">
+        <ShowroomBackdrop />
+        <div className="relative mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-4 px-6 pb-20 pt-10 sm:pb-24">
           <div>
             <h1 className="display text-4xl sm:text-5xl">Inventory</h1>
-            {status === 'ready' && <p className="mt-2 text-muted">{count}</p>}
+            {status === 'ready' && <p className="mt-2 text-showroom/80">{count}</p>}
           </div>
           {isAdmin && <Button onClick={() => setModal({ type: 'add' })}>Add vehicle</Button>}
         </div>
+      </section>
 
-        <FiltersBar filters={filters} categories={categories} onChange={setFilters} />
+      <main className="mx-auto max-w-7xl px-6 pb-10">
+
+        <div className="-mt-12 relative"><FiltersBar filters={filters} categories={categories} onChange={setFilters} /></div>
 
         {notice &&
           (notice.kind === 'success' ? (

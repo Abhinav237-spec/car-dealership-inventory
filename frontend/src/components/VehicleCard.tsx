@@ -41,7 +41,7 @@ export function VehicleCard({
   return (
     <article
       aria-label={name}
-      className={`flex flex-col border border-line bg-showroom transition-colors hover:border-asphalt ${soldOut ? 'sold-out-hatch' : ''}`}
+      className={`vehicle-lift flex flex-col border border-line bg-showroom hover:border-asphalt ${soldOut ? 'sold-out-hatch' : ''}`}
     >
       <div className="flex-1 p-5">
         <div className="flex items-start justify-between gap-3">

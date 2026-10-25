@@ -87,6 +87,39 @@
   }
 }
 
+/* Arrival scene (ShowroomBackdrop): the car rolls in, the road slides, wheels turn, then all stop. */
+.car-drive {
+  animation: car-arrive 1.8s cubic-bezier(0.15, 0.7, 0.2, 1) both;
+}
+.road-slide {
+  background-image: repeating-linear-gradient(90deg, var(--color-plate) 0 28px, transparent 28px 56px);
+  animation: road-slide 1.8s cubic-bezier(0.15, 0.7, 0.2, 1) both;
+}
+.wheel-spin {
+  animation: wheel-spin 1.8s cubic-bezier(0.15, 0.7, 0.2, 1) both;
+}
+@keyframes car-arrive {
+  from { transform: translateX(-90vw); }
+  to { transform: none; }
+}
+@keyframes road-slide {
+  from { background-position-x: 560px; }
+  to { background-position-x: 0; }
+}
+@keyframes wheel-spin {
+  from { transform: rotate(-1080deg); }
+  to { transform: none; }
+}
+
+/* Cards lift slightly under the pointer so the grid feels alive without moving on its own. */
+.vehicle-lift {
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.vehicle-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px -14px rgb(28 33 39 / 0.55);
+}
+
 @keyframes tag-settle {
   from {
     opacity: 0;
@@ -102,7 +135,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tag-intro {
+  .tag-intro,
+  .car-drive,
+  .road-slide,
+  .wheel-spin {
     animation: none;
+  }
+  .vehicle-lift:hover {
+    transform: none;
   }
 }

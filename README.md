@@ -19,6 +19,10 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for how the pieces fit together.
 |---|---|---|
 | ![Add](docs/screenshots/03-add-modal.png) | ![Filter](docs/screenshots/04-filter-electric.png) | ![Mobile](docs/screenshots/08-dashboard-mobile.png) |
 
+After sign-in, a car pulls into the lot once (road, wheels and car animate, then stop; disabled for reduced-motion users):
+
+![Banner](docs/screenshots/09-banner-desktop.png)
+
 ## Setup
 
 Requirements: Node 20+, Docker (for Postgres).
@@ -71,7 +75,7 @@ Run on 2026-10-25. Lint and type-check are clean for both packages.
 | Suite | Tests | Result | Statements | Branches | Functions |
 |---|---|---|---|---|---|
 | Backend (Jest + Supertest, incl. real Postgres) | 119 | all passing | 93% | 85% | 100% |
-| Frontend (Vitest + Testing Library) | 78 | all passing | 92% | 87% | 96% |
+| Frontend (Vitest + Testing Library) | 80 | all passing | 92% | 87% | 96% |
 
 What the backend tests cover: registration and login (validation, duplicate email, wrong password),
 JWT middleware and role guards (401 / 403), every vehicle endpoint (including 409 on out-of-stock purchase
