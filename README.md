@@ -66,12 +66,26 @@ Search accepts `make`, `model`, `category`, `minPrice`, `maxPrice`.
 
 ## Test report
 
-| Suite | Tests | Result | Coverage |
-|---|---|---|---|
-| Backend (Jest, incl. real Postgres) | 119 | all passing | 93% statements, 85% branches, 100% functions |
-| Frontend (Vitest) | 76 | all passing | not measured |
+Run on 2026-10-25. Lint and type-check are clean for both packages.
 
-Lint and type-check are clean for both packages.
+| Suite | Tests | Result | Statements | Branches | Functions |
+|---|---|---|---|---|---|
+| Backend (Jest + Supertest, incl. real Postgres) | 119 | all passing | 93% | 85% | 100% |
+| Frontend (Vitest + Testing Library) | 76 | all passing | 92% | 87% | 96% |
+
+What the backend tests cover: registration and login (validation, duplicate email, wrong password),
+JWT middleware and role guards (401 / 403), every vehicle endpoint (including 409 on out-of-stock purchase
+and 404 for unknown ids), search filters, config validation, and a repository **contract suite** that runs
+against both in-memory fakes and real Postgres. The frontend tests check what a user can see and do:
+forms and error messages, protected routes, the dashboard, filters, the Purchase button (disabled at zero
+stock), and the admin dialogs.
+
+Reproduce with:
+
+```bash
+cd backend  && TEST_DATABASE_URL=postgres://dealership:dealership@localhost:5432/dealership_test npm run test:coverage
+cd frontend && npm run test:coverage
+```
 
 ## My AI Usage
 
@@ -97,7 +111,7 @@ The API and database deploy to [Render](https://render.com), the SPA to [Vercel]
    environment variable `VITE_API_URL` = your Render URL (e.g. `https://dealership-api.onrender.com`, no trailing slash).
 3. Put both URLs here:
 
-- Live app: https://car-dealership-inventory-j2mx0h2k4-appointly2.vercel.app
+- Live app: https://car-dealership-inventory-psi.vercel.app
 - Live API: https://dealership-api-cngs.onrender.com/api/health
 - Demo admin: `admin@dealership.test` / `Lotline#Admin2026` (demo data only)
 
