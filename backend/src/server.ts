@@ -3,6 +3,7 @@ import { Pool } from 'pg';
 import { createApp } from './app';
 import { loadConfig } from './config';
 import { migrate } from './db/migrate';
+import { seedDatabase } from './db/seedDatabase';
 import { PostgresUserRepository } from './repositories/PostgresUserRepository';
 import { PostgresVehicleRepository } from './repositories/PostgresVehicleRepository';
 import { AuthService } from './services/AuthService';
@@ -22,6 +23,7 @@ async function main(): Promise<void> {
 
   const pool = new Pool({ connectionString: config.databaseUrl });
   await migrate(pool); // keeps the schema current on every start
+  if (process.env.SEED_ON_START === 'true') await seedDatabase(pool, config.bcryptCost);
 
   const tokenService = new JwtTokenService(config.jwtSecret, config.jwtExpiresInSeconds);
   const authService = new AuthService(
