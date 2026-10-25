@@ -2,13 +2,16 @@ import cors from 'cors';
 import express, { Express, Request, Response } from 'express';
 import { errorHandler } from './middleware/errorHandler';
 import { authRoutes } from './routes/authRoutes';
+import { vehicleRoutes } from './routes/vehicleRoutes';
 import { AuthService } from './services/AuthService';
 import { TokenService } from './services/TokenService';
+import { VehicleService } from './services/VehicleService';
 
 /** Everything the app needs, injected from outside (see server.ts / tests). */
 export interface AppDependencies {
   authService: AuthService;
   tokenService: TokenService;
+  vehicleService: VehicleService;
 }
 
 /**
@@ -28,6 +31,7 @@ export function createApp(deps: AppDependencies): Express {
   });
 
   app.use('/api/auth', authRoutes(deps.authService));
+  app.use('/api/vehicles', vehicleRoutes(deps.vehicleService, deps.tokenService));
 
   // Fallbacks run last: unknown routes, then the central error handler.
   app.use((_req: Request, res: Response) => {

@@ -22,6 +22,27 @@ export interface User {
 
 export type NewUser = Omit<User, 'id' | 'createdAt'>;
 
+/** A car in the dealership's inventory. `quantity` is units in stock. */
+export interface Vehicle {
+  id: string;
+  make: string;
+  model: string;
+  category: string;
+  price: number;
+  quantity: number;
+}
+
+export type VehicleInput = Omit<Vehicle, 'id'>;
+
+/** All filters are optional and combine with AND. */
+export interface VehicleSearchCriteria {
+  make?: string;
+  model?: string;
+  category?: string;
+  minPrice?: number;
+  maxPrice?: number;
+}
+
 /** The safe-to-share view of a user (what the API returns). */
 export interface PublicUser {
   id: string;
