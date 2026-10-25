@@ -81,7 +81,7 @@ describe('request', () => {
   it('reports an unreachable server as an ApiError with status 0', async () => {
     fetchMock.mockRejectedValue(new TypeError('Failed to fetch'))
 
-    const error = await request('/api/vehicles').catch((e) => e)
+    const error = (await request('/api/vehicles').catch((e: unknown) => e)) as ApiError
 
     expect(error).toBeInstanceOf(ApiError)
     expect(error.status).toBe(0)
