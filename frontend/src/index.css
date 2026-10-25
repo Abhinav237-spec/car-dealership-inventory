@@ -5,7 +5,7 @@
  * racing-green paint, and the yellow of a price tag hung on a mirror.
  */
 @theme {
-  --font-sans: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
 
   --color-asphalt: #1c2127;
   --color-concrete: #e4e7ea;
