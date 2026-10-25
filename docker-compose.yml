@@ -1,0 +1,24 @@
+# Local PostgreSQL for development and integration tests.
+#   docker compose up -d      start the database
+#   docker compose down -v    stop it and delete the data
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: dealership
+      POSTGRES_PASSWORD: dealership
+      POSTGRES_DB: dealership
+    ports:
+      - "5432:5432"
+    volumes:
+      - dealership-data:/var/lib/postgresql/data
+      # Scripts here run once, on first start: they create the test database.
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dealership -d dealership"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  dealership-data:

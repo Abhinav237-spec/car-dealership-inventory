@@ -1,6 +1,7 @@
 /** Jest configuration: TypeScript via ts-jest, tests live in tests/ */
 module.exports = {
   testEnvironment: 'node',
+  setupFiles: ['dotenv/config'], // lets a local .env supply TEST_DATABASE_URL
   roots: ['<rootDir>/tests'],
   transform: {
     // Keep full type-checking; only mute the harmless "node16 hybrid module" notice (TS151002).
