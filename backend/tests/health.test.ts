@@ -1,9 +1,9 @@
 import request from 'supertest';
-import { createApp } from '../src/app';
+import { buildTestApp } from './support/buildTestApp';
 
 describe('GET /api/health', () => {
   it('responds 200 with a status payload', async () => {
-    const app = createApp();
+    const { app } = buildTestApp();
 
     const response = await request(app).get('/api/health');
 
@@ -12,7 +12,7 @@ describe('GET /api/health', () => {
   });
 
   it('responds 404 with a JSON error for unknown routes', async () => {
-    const app = createApp();
+    const { app } = buildTestApp();
 
     const response = await request(app).get('/api/does-not-exist');
 
