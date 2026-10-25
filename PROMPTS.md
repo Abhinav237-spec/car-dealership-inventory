@@ -4,7 +4,7 @@ Every prompt I sent to the AI (Claude Code), in order and unedited. Only one edi
 
 AI replies are not summarised here. For the complete conversation, see the chat link below.
 
-**Full chat link:** _paste the public share link of the Claude session here_
+**Full chat link:** https://claude.ai/share/1e269c1f-ef3c-4d88-9f75-c4596fe36294
 
 ## Prompt 1 (attached: the 'TDD Kata: Car Dealership Inventory System' document)
 
