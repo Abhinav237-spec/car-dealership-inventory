@@ -100,6 +100,7 @@ cd frontend && npm run test:coverage
 **What I did (Abhinav):**
 - Set the goal and the process: I took the kata brief and asked for a GitHub repo with milestone-style issues for each section
   (M1 backend, M2 frontend), then chose to build M1 and M2 in parallel.
+- Planned the system design and architecture of the project, suggested the scaffold code too.
 - Asked for the design to be explained as it was built, so the code carries short comments and `ARCHITECTURE.md` exists.
 - Chose the hosting (Render for the API and database, Vercel for the frontend), created and connected those accounts,
   and supplied the database settings.
