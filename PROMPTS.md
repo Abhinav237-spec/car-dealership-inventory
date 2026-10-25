@@ -102,3 +102,12 @@ A public Git repository link (e.g., on GitHub, GitLab).
 · A test report showing the results of your test suite.
 · A root PROMPTS.md containing your raw, unedited AI chat logs or public chat links (no AI-generated summaries)
 ```
+
+## Chat link
+
+```text
+ https://claude.ai/share/1e269c1f-ef3c-4d88-9f75-c4596fe36294
+
+```
+
+
