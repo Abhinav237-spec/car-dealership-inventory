@@ -71,7 +71,7 @@ Run on 2026-10-25. Lint and type-check are clean for both packages.
 | Suite | Tests | Result | Statements | Branches | Functions |
 |---|---|---|---|---|---|
 | Backend (Jest + Supertest, incl. real Postgres) | 119 | all passing | 93% | 85% | 100% |
-| Frontend (Vitest + Testing Library) | 76 | all passing | 92% | 87% | 96% |
+| Frontend (Vitest + Testing Library) | 78 | all passing | 92% | 87% | 96% |
 
 What the backend tests cover: registration and login (validation, duplicate email, wrong password),
 JWT middleware and role guards (401 / 403), every vehicle endpoint (including 409 on out-of-stock purchase

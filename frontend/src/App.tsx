@@ -3,6 +3,7 @@ import { AuthProvider } from './auth/AuthContext'
 import { ProtectedRoute } from './auth/ProtectedRoute'
 import { DashboardPage } from './pages/DashboardPage'
 import { LoginPage } from './pages/LoginPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { RegisterPage } from './pages/RegisterPage'
 
 /**
@@ -18,6 +19,8 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<DashboardPage />} />
         </Route>
+        {/* Anything else: a friendly dead end instead of a blank page. */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AuthProvider>
   )
