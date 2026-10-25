@@ -1,5 +1,7 @@
 # Architecture
 
+Project owner: Abhinav ([@Abhinav237-spec](https://github.com/Abhinav237-spec)).
+
 A short tour of how Lotline (the dealership inventory app) fits together. Each source file also
 carries brief comments saying what it does and why.
 

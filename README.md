@@ -7,6 +7,8 @@ search and buy vehicles; admins can add, edit, restock and delete them.
 - **Frontend:** React + TypeScript + Vite + Tailwind CSS v4
 - **Tests:** Jest/Supertest (backend), Vitest/Testing Library (frontend)
 
+**Author:** Abhinav ([@Abhinav237-spec](https://github.com/Abhinav237-spec)), project owner. All commits are made from this account, with AI co-authorship marked on each one.
+
 See [ARCHITECTURE.md](ARCHITECTURE.md) for how the pieces fit together.
 
 ## Screenshots
@@ -93,17 +95,32 @@ cd frontend && npm run test:coverage
 
 ## My AI Usage
 
-I used Claude (Anthropic) as a pairing partner throughout.
+**Tool:** Claude (Anthropic), used through Claude Code, as a pairing partner for the whole project.
 
-- **What it did:** created the GitHub repo, milestones and issues from the kata spec; wrote
-  failing tests first and then the implementation (see the red/green commit pairs); wrote the
-  architecture notes and code comments; ran browser walkthroughs to check the UI.
-- **Where I steered:** scope and milestone order, choosing the stack, and reviewing every change.
-- **How it's marked:** every AI-assisted commit carries a `Co-Authored-By: Claude` trailer.
-- **Reflection:** AI was fastest at boilerplate and test scaffolding. Specs still needed a human
-  to decide ambiguous points, for example whether create/update should be admin-only.
+**What I did (Abhinav):**
+- Set the goal and the process: I took the kata brief and asked for a GitHub repo with milestone-style issues for each section
+  (M1 backend, M2 frontend), then chose to build M1 and M2 in parallel.
+- Asked for the design to be explained as it was built, so the code carries short comments and `ARCHITECTURE.md` exists.
+- Chose the hosting (Render for the API and database, Vercel for the frontend), created and connected those accounts,
+  and supplied the database settings.
+- Tested the live site, reported what broke (the login 405), and decided when each piece was done.
+- Made the product calls: keeping sold-out cars visible, and adding the car banner and animations.
 
-Raw chat logs are in [PROMPTS.md](PROMPTS.md).
+**What Claude did:**
+- Wrote the issues and milestones from the kata brief, and designed the layered architecture
+  (routes, services, repositories, Postgres).
+- Wrote the scaffolding, the failing tests first, then the implementation (see the red/green commit pairs),
+  and the comments, README and architecture notes.
+- Ran the code and browser checks and fixed the bugs found, including the 405 login fix and the missing not-found page.
+
+**How it's marked:** every AI-assisted commit carries a `Co-Authored-By: Claude` trailer.
+
+**Reflection:** AI was fastest at boilerplate, test scaffolding and wiring things together, and it let me ship a full stack
+with tests and a live deployment quickly. It still needed a human to set the direction, run the real environments,
+and catch what only shows up in production, such as the missing `VITE_API_URL`. Open questions in the spec, like whether
+create and update should be admin-only, are product decisions that stay with the developer.
+
+Prompts I sent are in [PROMPTS.md](PROMPTS.md).
 
 ## Deployment
 
@@ -111,8 +128,9 @@ The API and database deploy to [Render](https://render.com), the SPA to [Vercel]
 
 1. **Backend:** Render → New → Blueprint → select this repo (reads `render.yaml`). Enter `ADMIN_PASSWORD` when
    prompted. Set `SEED_ON_START=true` on the service so the admin and sample cars are created at boot (or run `npm run seed` from a shell).
-2. **Frontend:** Vercel → Add New Project → select this repo, set **Root Directory** to `frontend`, and add the
-   environment variable `VITE_API_URL` = your Render URL (e.g. `https://dealership-api.onrender.com`, no trailing slash).
+2. **Frontend:** Vercel → Add New Project → select this repo, and set **Root Directory** to `frontend` (framework: Vite).
+   `frontend/vercel.json` forwards `/api/*` to the Render API, so edit its destination if your Render URL differs
+   (or set `VITE_API_URL` to your Render URL instead).
 3. Put both URLs here:
 
 - Live app: https://car-dealership-inventory-psi.vercel.app
