@@ -56,11 +56,33 @@ cd frontend && npm test
 
 Without `TEST_DATABASE_URL` the Postgres contract suite is skipped; everything else still runs.
 
+## Sign-up restriction: no consecutive A's
+
+Business rule: nobody may register with an email address containing **two or more A's in a row, in any
+case** (`aa`, `AA`, `aA`, `Aa`), anywhere in the address, including the domain.
+
+| Allowed | Rejected |
+|---|---|
+| `ada@example.com`, `a.a@example.com`, `bob@example.com` | `aaron@example.com`, `bAAn@example.com`, `me@saas.com` |
+
+- **Backend:** `POST /api/auth/register` returns `400` with `email: must not contain consecutive letter a (A or a)`.
+  The rule lives in `backend/src/validation/emailPolicy.ts` and is applied to the register schema only, so
+  existing accounts can still sign in.
+- **Frontend:** the register form shows the same message instantly and makes no API call
+  (`frontend/src/lib/emailPolicy.ts`, mirrors the backend rule; the server remains the source of truth).
+- **How it was built (Red → Green → Refactor):**
+  1. *Red:* 7 failing API tests (`Expected: 400, Received: 201`) plus 3 guard tests for emails that must still work.
+  2. *Green:* the simplest change, one `refine()` on the email schema.
+  3. *Refactor:* extracted the rule into `emailPolicy.ts` with a named function, shared message and 14 unit tests.
+  4. The same cycle on the frontend: failing form tests, then the helper and form change.
+
+  See the matching `test(...)`, `feat(...)` and `refactor(...)` commits in `git log`.
+
 ## API
 
 | Method | Path | Access |
 |---|---|---|
-| POST | `/api/auth/register`, `/api/auth/login` | public |
+| POST | `/api/auth/register`, `/api/auth/login` | public (register rejects consecutive-A emails) |
 | GET | `/api/vehicles`, `/api/vehicles/search` | signed in |
 | POST | `/api/vehicles` | signed in |
 | PUT | `/api/vehicles/:id` | signed in |
@@ -76,8 +98,8 @@ Run on 2026-10-25. Lint and type-check are clean for both packages.
 
 | Suite | Tests | Result | Statements | Branches | Functions |
 |---|---|---|---|---|---|
-| Backend (Jest + Supertest, incl. real Postgres) | 119 | all passing | 93% | 85% | 100% |
-| Frontend (Vitest + Testing Library) | 80 | all passing | 92% | 87% | 96% |
+| Backend (Jest + Supertest, incl. real Postgres) | 143 | all passing | 93% | 85% | 100% |
+| Frontend (Vitest + Testing Library) | 95 | all passing | 92% | 87% | 96% |
 
 What the backend tests cover: registration and login (validation, duplicate email, wrong password),
 JWT middleware and role guards (401 / 403), every vehicle endpoint (including 409 on out-of-stock purchase
