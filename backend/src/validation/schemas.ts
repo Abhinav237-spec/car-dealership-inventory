@@ -1,7 +1,12 @@
 import { z } from 'zod';
 
 /** Emails are trimmed and lower-cased so "Ada@x.com" and "ada@x.com" are one account. */
-const email = z.string().trim().toLowerCase().pipe(z.email({ error: 'must be a valid email address' }));
+const email = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .pipe(z.email({ error: 'must be a valid email address' }))
+  .refine((value) => !value.includes('aa'), 'must not contain consecutive letter a');
 
 export const registerSchema = z.object({
   email,
