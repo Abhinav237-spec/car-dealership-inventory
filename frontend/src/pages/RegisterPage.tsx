@@ -4,6 +4,7 @@ import { useAuth } from '../auth/AuthContext'
 import { AuthLayout } from '../components/AuthLayout'
 import { Button } from '../components/Button'
 import { TextField } from '../components/TextField'
+import { CONSECUTIVE_A_MESSAGE, hasConsecutiveAs } from '../lib/emailPolicy'
 
 const MIN_PASSWORD_LENGTH = 8 // matches the backend rule
 
@@ -20,7 +21,11 @@ export function RegisterPage() {
     event.preventDefault()
     setError(null)
 
-    // Fail fast in the browser for the rule we already know; the server still enforces it.
+    // Fail fast in the browser for the rules we already know; the server still enforces them.
+    if (hasConsecutiveAs(email)) {
+      setError(CONSECUTIVE_A_MESSAGE)
+      return
+    }
     if (password.length < MIN_PASSWORD_LENGTH) {
       setError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters.`)
       return
