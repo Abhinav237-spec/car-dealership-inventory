@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { CONSECUTIVE_A_MESSAGE, hasConsecutiveAs } from './emailPolicy';
 
 /** Emails are trimmed and lower-cased so "Ada@x.com" and "ada@x.com" are one account. */
 const email = z
@@ -6,7 +7,7 @@ const email = z
   .trim()
   .toLowerCase()
   .pipe(z.email({ error: 'must be a valid email address' }))
-  .refine((value) => !value.includes('aa'), 'must not contain consecutive letter a');
+  .refine((value) => !hasConsecutiveAs(value), CONSECUTIVE_A_MESSAGE);
 
 export const registerSchema = z.object({
   email,
