@@ -41,6 +41,27 @@ describe('RegisterPage', () => {
     expect(await screen.findByText('Home screen')).toBeInTheDocument()
   })
 
+  it.each(['aaron@example.com', 'BAAn@example.com', 'maAx@example.com'])(
+    'blocks %s in the browser, with a clear message and no API call',
+    async (email) => {
+      renderRegister()
+
+      await fillAndSubmit(email, 'Passw0rd!')
+
+      expect(await screen.findByRole('alert')).toHaveTextContent(/consecutive/i)
+      expect(authApi.register).not.toHaveBeenCalled()
+    },
+  )
+
+  it('lets an email with single, separated a letters through', async () => {
+    vi.mocked(authApi.register).mockResolvedValue(makeSession())
+    renderRegister()
+
+    await fillAndSubmit('ada@example.com', 'Passw0rd!')
+
+    expect(authApi.register).toHaveBeenCalled()
+  })
+
   it('explains a too-short password without calling the API', async () => {
     renderRegister()
 
