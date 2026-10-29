@@ -103,6 +103,36 @@ A public Git repository link (e.g., on GitHub, GitLab).
 · A root PROMPTS.md containing your raw, unedited AI chat logs or public chat links (no AI-generated summaries)
 ```
 
+## Prompt 16
+
+```text
+aight the render one is not a big deal assesment will be done before only but ON CERTAIN PLACES of add my name i mean my contributor name so that they should know somethings are done by me also in the AI usage part say that i decided the architecture and also the sccafold code's some aprt was  done by me and the milestones were set by me Commit trailer: the spec’s example is `Co-authored-by: AI Tool Name <AI@users.noreply.github.com>`. Mine is `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>      `
+```
+
+## Prompt 17
+
+```text
+so i guess everythings done
+```
+
+## Prompt 18
+
+```text
+check it once again fi its running well i got an interview check cverything
+```
+
+## Prompt 19
+
+```text
+can u just run all the test cases we have created in the repo once nd provide me with the output we gett
+```
+
+## Prompt 20
+
+```text
+So we will here follow the TDD principles and use red green and refractor to add onto a feature where we cannot let users with emails ahving consecutive A's or a's sign up to it it is a restriction for us just follow the principles and let me know side by side and update the read me file with it
+```
+
 ## Chat link
 
 ```text
